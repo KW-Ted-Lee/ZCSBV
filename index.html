@@ -122,6 +122,9 @@ ol.tx b{font-weight:700}
 .ref .btn{justify-self:start;font-size:13px;padding:4px 10px}
 .fixbox{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);flex-basis:100%}
 .fixbox input{width:62px;border:1px solid var(--line);background:var(--paper);border-radius:5px;padding:3px 6px;font-family:var(--f-mono);text-align:center}
+.signed{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;border:1px solid var(--line);background:var(--paper);border-radius:5px}
+.signed span{padding:0 2px 0 8px;font-family:var(--f-mono);color:var(--muted);font-weight:500}
+.signed input{border:0!important;background:transparent!important;padding-left:2px!important}
 .export-status{font-size:12px;color:var(--muted)}
 details.thr summary{cursor:pointer;font-size:13px;color:var(--muted)}
 details.thr .row{margin-top:8px}
@@ -168,23 +171,23 @@ footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);paddin
       <div>
         <div class="sec-label"><span>基本資料</span></div>
         <div class="row">
-          <div class="field"><label for="pd">遠用瞳距 PD (mm)</label><input id="pd" type="number" step="0.5" inputmode="decimal"></div>
-          <div class="field"><label for="nearCm">近距 (cm)</label><input id="nearCm" type="number" step="1" inputmode="decimal"></div>
-          <div class="field"><label for="age">年齡</label><input id="age" type="number" step="1" inputmode="numeric"></div>
-          <div class="field"><label for="amp">調節幅度 (D)</label><input id="amp" type="number" step="0.25" inputmode="decimal" placeholder="依年齡"></div>
-          <div class="field"><label for="npc">NPC 破裂 (cm)</label><input id="npc" type="number" step="0.5" inputmode="decimal"></div>
-          <div class="field"><label for="npcR">NPC 恢復 (cm)</label><input id="npcR" type="number" step="0.5" inputmode="decimal"></div>
+          <div class="field"><label for="pd">遠用瞳距 PD (mm)</label><input id="pd" type="text" step="0.5" inputmode="decimal"></div>
+          <div class="field"><label for="nearCm">近距 (cm)</label><input id="nearCm" type="text" step="1" inputmode="decimal"></div>
+          <div class="field"><label for="age">年齡</label><input id="age" type="text" step="1" inputmode="numeric"></div>
+          <div class="field"><label for="amp">調節幅度 (D)</label><input id="amp" type="text" step="0.25" inputmode="decimal" placeholder="依年齡"></div>
+          <div class="field"><label for="npc">NPC 破裂 (cm)</label><input id="npc" type="text" step="0.5" inputmode="decimal"></div>
+          <div class="field"><label for="npcR">NPC 恢復 (cm)</label><input id="npcR" type="text" step="0.5" inputmode="decimal"></div>
         </div>
       </div>
 
       <div>
         <div class="sec-label"><span>隱斜位（Δ）</span><span class="hint">0 = ortho</span></div>
         <div style="display:grid;gap:8px">
-          <div class="ph"><span class="lbl">遠距</span><input id="dPh" type="number" step="0.5" min="0" inputmode="decimal" aria-label="遠距隱斜位量">
+          <div class="ph"><span class="lbl">遠距</span><input id="dPh" type="text" step="0.5" min="0" inputmode="decimal" aria-label="遠距隱斜位量">
             <span class="seg"><input type="radio" name="dDir" id="dExo" value="exo"><label for="dExo">EXO</label><input type="radio" name="dDir" id="dEso" value="eso"><label for="dEso">ESO</label></span></div>
-          <div class="ph"><span class="lbl">近距</span><input id="nPh" type="number" step="0.5" min="0" inputmode="decimal" aria-label="近距隱斜位量">
+          <div class="ph"><span class="lbl">近距</span><input id="nPh" type="text" step="0.5" min="0" inputmode="decimal" aria-label="近距隱斜位量">
             <span class="seg"><input type="radio" name="nDir" id="nExo" value="exo"><label for="nExo">EXO</label><input type="radio" name="nDir" id="nEso" value="eso"><label for="nEso">ESO</label></span></div>
-          <div class="ph"><span class="lbl">近+1.00</span><input id="gPh" type="number" step="0.5" min="0" inputmode="decimal" placeholder="選填" aria-label="近距加 +1.00 後隱斜位量">
+          <div class="ph"><span class="lbl">近+1.00</span><input id="gPh" type="text" step="0.5" min="0" inputmode="decimal" placeholder="選填" aria-label="近距加 +1.00 後隱斜位量">
             <span class="seg"><input type="radio" name="gDir" id="gExo" value="exo"><label for="gExo">EXO</label><input type="radio" name="gDir" id="gEso" value="eso"><label for="gEso">ESO</label></span></div>
         </div>
         <div class="hint" style="margin-top:4px">近+1.00：近距加 +1.00 D 後再量的隱斜位，用來算梯度型 AC/A。</div>
@@ -195,31 +198,31 @@ footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);paddin
         <table class="vg">
           <thead><tr><th></th><th>模糊</th><th>破裂</th><th>恢復</th></tr></thead>
           <tbody>
-            <tr><th class="rh">遠 <span class="tag-bi">BI</span></th><td><input id="dBI1" type="number" step="1" aria-label="遠距BI模糊"></td><td><input id="dBI2" type="number" step="1" aria-label="遠距BI破裂"></td><td><input id="dBI3" type="number" step="1" aria-label="遠距BI恢復"></td></tr>
-            <tr><th class="rh">遠 <span class="tag-bo">BO</span></th><td><input id="dBO1" type="number" step="1" aria-label="遠距BO模糊"></td><td><input id="dBO2" type="number" step="1" aria-label="遠距BO破裂"></td><td><input id="dBO3" type="number" step="1" aria-label="遠距BO恢復"></td></tr>
-            <tr><th class="rh">近 <span class="tag-bi">BI</span></th><td><input id="nBI1" type="number" step="1" aria-label="近距BI模糊"></td><td><input id="nBI2" type="number" step="1" aria-label="近距BI破裂"></td><td><input id="nBI3" type="number" step="1" aria-label="近距BI恢復"></td></tr>
-            <tr><th class="rh">近 <span class="tag-bo">BO</span></th><td><input id="nBO1" type="number" step="1" aria-label="近距BO模糊"></td><td><input id="nBO2" type="number" step="1" aria-label="近距BO破裂"></td><td><input id="nBO3" type="number" step="1" aria-label="近距BO恢復"></td></tr>
+            <tr><th class="rh">遠 <span class="tag-bi">BI</span></th><td><input id="dBI1" type="text" inputmode="decimal" step="1" aria-label="遠距BI模糊"></td><td><input id="dBI2" type="text" inputmode="decimal" step="1" aria-label="遠距BI破裂"></td><td><input id="dBI3" type="text" inputmode="text" step="1" aria-label="遠距BI恢復"></td></tr>
+            <tr><th class="rh">遠 <span class="tag-bo">BO</span></th><td><input id="dBO1" type="text" inputmode="decimal" step="1" aria-label="遠距BO模糊"></td><td><input id="dBO2" type="text" inputmode="decimal" step="1" aria-label="遠距BO破裂"></td><td><input id="dBO3" type="text" inputmode="text" step="1" aria-label="遠距BO恢復"></td></tr>
+            <tr><th class="rh">近 <span class="tag-bi">BI</span></th><td><input id="nBI1" type="text" inputmode="decimal" step="1" aria-label="近距BI模糊"></td><td><input id="nBI2" type="text" inputmode="decimal" step="1" aria-label="近距BI破裂"></td><td><input id="nBI3" type="text" inputmode="text" step="1" aria-label="近距BI恢復"></td></tr>
+            <tr><th class="rh">近 <span class="tag-bo">BO</span></th><td><input id="nBO1" type="text" inputmode="decimal" step="1" aria-label="近距BO模糊"></td><td><input id="nBO2" type="text" inputmode="decimal" step="1" aria-label="近距BO破裂"></td><td><input id="nBO3" type="text" inputmode="text" step="1" aria-label="近距BO恢復"></td></tr>
           </tbody>
         </table>
       </div>
 
       <div>
-        <div class="sec-label"><span>相對調節（D）</span></div>
+        <div class="sec-label"><span>相對調節（D）</span><span class="hint">正負號已內建，只填數字</span></div>
         <div class="row">
-          <div class="field"><label for="nra">NRA（+）</label><input id="nra" type="number" step="0.25" inputmode="decimal" placeholder="+2.00"></div>
-          <div class="field"><label for="pra">PRA（−）</label><input id="pra" type="number" step="0.25" inputmode="decimal" placeholder="-2.25"></div>
+          <div class="field"><label for="nra">NRA</label><div class="signed"><span aria-hidden="true">+</span><input id="nra" type="text" inputmode="decimal" placeholder="2.00"></div></div>
+          <div class="field"><label for="pra">PRA</label><div class="signed"><span aria-hidden="true">−</span><input id="pra" type="text" inputmode="decimal" placeholder="2.25"></div></div>
         </div>
       </div>
 
       <details class="thr">
         <summary>判讀標準（預設依 Morgan 常模，可調整）</summary>
         <div class="row">
-          <div class="field"><label for="tDExo">遠外斜 &gt;</label><input id="tDExo" type="number" step="0.5" value="3"></div>
-          <div class="field"><label for="tDEso">遠內斜 &gt;</label><input id="tDEso" type="number" step="0.5" value="1"></div>
-          <div class="field"><label for="tNExo">近外斜 &gt;</label><input id="tNExo" type="number" step="0.5" value="6"></div>
-          <div class="field"><label for="tNEso">近內斜 &gt;</label><input id="tNEso" type="number" step="0.5" value="0"></div>
-          <div class="field"><label for="tLow">AC/A 低 &lt;</label><input id="tLow" type="number" step="0.5" value="3"></div>
-          <div class="field"><label for="tHigh">AC/A 高 &gt;</label><input id="tHigh" type="number" step="0.5" value="7"></div>
+          <div class="field"><label for="tDExo">遠外斜 &gt;</label><input id="tDExo" type="text" step="0.5" value="3"></div>
+          <div class="field"><label for="tDEso">遠內斜 &gt;</label><input id="tDEso" type="text" step="0.5" value="1"></div>
+          <div class="field"><label for="tNExo">近外斜 &gt;</label><input id="tNExo" type="text" step="0.5" value="6"></div>
+          <div class="field"><label for="tNEso">近內斜 &gt;</label><input id="tNEso" type="text" step="0.5" value="0"></div>
+          <div class="field"><label for="tLow">AC/A 低 &lt;</label><input id="tLow" type="text" step="0.5" value="3"></div>
+          <div class="field"><label for="tHigh">AC/A 高 &gt;</label><input id="tHigh" type="text" step="0.5" value="7"></div>
         </div>
       </details>
     </form>
@@ -234,8 +237,8 @@ footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);paddin
           <input type="radio" name="scale" id="scFix" value="fixed"><label for="scFix">固定尺度</label>
         </span>
         <div class="fixbox" id="fixBox" hidden>
-          <label>橫軸 <input id="fxMin" type="number" step="5" value="-20" aria-label="橫軸最小值"> ～ <input id="fxMax" type="number" step="5" value="70" aria-label="橫軸最大值"> Δ</label>
-          <label>縱軸 0 ～ <input id="fyMax" type="number" step="0.5" value="10" aria-label="縱軸最大值"> D</label>
+          <label>橫軸 <input id="fxMin" type="text" inputmode="text" step="5" value="-20" aria-label="橫軸最小值"> ～ <input id="fxMax" type="text" step="5" value="70" aria-label="橫軸最大值"> Δ</label>
+          <label>縱軸 0 ～ <input id="fyMax" type="text" step="0.5" value="10" aria-label="縱軸最大值"> D</label>
         </div>
         <div class="legend" id="legend" style="flex-basis:100%"></div>
       </div>
@@ -351,7 +354,11 @@ const TYPES = {
 
 /* ===== Helpers ===== */
 const $ = id => document.getElementById(id);
-const num = id => { const v = $(id).value.trim(); if(v==='') return null; const n = parseFloat(v); return isNaN(n)?null:n; };
+// 接受 +2.00、−2.25（數學減號）、全形＋－、逗號小數點
+const normNum = v => String(v).trim()
+  .replace(/[０-９]/g,ch=>String.fromCharCode(ch.charCodeAt(0)-0xFEE0))
+  .replace(/[＋]/g,'+').replace(/[−－–—]/g,'-').replace(/[．。，,]/g,'.').replace(/\s+/g,'');
+const num = id => { const v = normNum($(id).value); if(v===''||v==='+'||v==='-') return null; if(!/^[+-]?(\d+\.?\d*|\.\d+)$/.test(v)) return null; return parseFloat(v); };
 const f1 = n => (n==null||isNaN(n))?'—':(Math.round(n*10)/10).toFixed(1);
 const f2 = n => (n==null||isNaN(n))?'—':(Math.round(n*100)/100).toFixed(2);
 const sgnD = n => (n>0?'+':'')+f2(n);
@@ -373,7 +380,7 @@ function compute(){
   c.dPh = signed('dPh','dDir'); c.nPh = signed('nPh','nDir'); c.gPh = signed('gPh','gDir');
   const v = k => [num(k+'1'),num(k+'2'),num(k+'3')];
   c.dBI=v('dBI'); c.dBO=v('dBO'); c.nBI=v('nBI'); c.nBO=v('nBO');
-  c.nra = num('nra'); const p = num('pra'); c.pra = p==null?null:-Math.abs(p);
+  const nr = num('nra'); c.nra = nr==null?null:Math.abs(nr); const p = num('pra'); c.pra = p==null?null:-Math.abs(p);
   c.demN = c.pdcm!=null ? c.pdcm*c.An : null;
   c.aca = (c.pdcm!=null && c.dPh!=null && c.nPh!=null) ? c.pdcm + (c.nPh-c.dPh)/c.An : null;
   c.gaca = (c.nPh!=null && c.gPh!=null) ? (c.nPh - c.gPh)/1 : null;
@@ -745,7 +752,8 @@ function restore(){ try{ const o=JSON.parse(localStorage.getItem('zcsbv-draft')|
 function loadPreset(k){
   const p=PRESETS[k]; if(!p) return;
   const setPh=(id,dir,v)=>{ if(v===''||v==null){$(id).value='';setRadio(dir,'exo');return;} $(id).value=Math.abs(v); setRadio(dir,v>0?'eso':'exo'); };
-  ['pd','nearCm','age','amp','npc','npcR','nra','pra'].forEach(f=>$(f).value=p[f]??'');
+  ['pd','nearCm','age','amp','npc','npcR'].forEach(f=>$(f).value=p[f]??'');
+  $('nra').value=p.nra==null?'':Math.abs(p.nra).toFixed(2); $('pra').value=p.pra==null?'':Math.abs(p.pra).toFixed(2);
   setPh('dPh','dDir',p.dPh); setPh('nPh','nDir',p.nPh); setPh('gPh','gDir',p.gPh);
   ['dBI','dBO','nBI','nBO'].forEach(k2=>p[k2].forEach((v,i)=>$(k2+(i+1)).value=v));
   quiz.pick=null; step=STEPS.length; render();
